@@ -53,15 +53,6 @@
     font-size: 17px;
     text-align: center;
   }
-  .handleEquipment{
-    // text-align: center;
-  }
-  .handleContent{
-    text-indent: 2em;
-  }
-  .constraintImport{
-    // padding: 10px 0px;
-  }
   .btnWrap{
     display: flex;
     align-items: center;

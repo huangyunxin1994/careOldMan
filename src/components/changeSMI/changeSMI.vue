@@ -59,9 +59,7 @@
 </script>
 
 <style scoped lang="scss">
-  .handleEquipment{
-    // text-align: center;
-  }
+
   .handleContent{
     text-indent: 2em;
   }
