@@ -105,6 +105,7 @@
 						            message: '已取消添加'
 						          });          
 						        });
+						this.cancelBtn()
 					}
 			 })
 			
