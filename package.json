@@ -15,8 +15,6 @@
     "element-ui": "^2.13.0",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
-    "html2canvas": "^1.0.0-rc.5",
-    "jspdf": "^1.5.3",
     "nprogress": "^0.2.0",
     "qs": "^6.9.4",
     "vue": "^2.2.2",
