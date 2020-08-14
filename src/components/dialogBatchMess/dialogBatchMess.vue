@@ -10,7 +10,7 @@
         </p> -->
     	</div>
       <div class="btnWrap">
-        <el-button type="primary" @click="downloadTemplate">下载模板</el-button>
+        <el-link type="primary" href="http://192.168.1.9:8083/equipment/download" download="">下载模板</el-link>
         <el-button type="primary" @click="importTemplate">导入</el-button>
       </div>
     </el-dialog>
@@ -18,7 +18,8 @@
 </template>
 
 <script>
-  export default{
+  import { downloadModal } from '@/api/api'
+  export default {
     data(){
       return{
         dialogPassVisible:false,
@@ -26,10 +27,6 @@
       }
     },
     methods:{
-      // 下载模板
-      downloadTemplate(){
-        this.dialogPassVisible = false
-      },
       importTemplate(){
         this.dialogPassVisible = false
       },

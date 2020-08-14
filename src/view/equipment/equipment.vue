@@ -79,7 +79,7 @@
   import dialogBatch from '@/components/dialogBatchMess/dialogBatchMess.vue'
   import dialogSmi from '@/components/changeSMI/changeSMI.vue'
   import myTree from '@/components/tree/tree_.vue'
-  import { getEquipment, updateEquipment } from '@/api/api'
+  import { getEquipment, updateEquipment, downloadModal } from '@/api/api'
   export default {
     name:'home',
     components:{
