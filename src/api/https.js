@@ -12,6 +12,13 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // }
+    console.log(config)
+    if(config.method=='post'&&config.url== "/equipment/ImportExcel"){
+      // config.headers = {
+      //   'Content-Type': 'multipart/form-data'
+      // }
+    } 
+    
     return config
   },
   error => {
@@ -75,6 +82,25 @@ export function post (url, data) {
           reject(err)
         })
     })
+}
+
+/**
+ * post 方法封装
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function post2 (url, data) {
+ 
+  return new Promise((resolve, reject) => {
+
+    service.post(url, data)
+      .then(response => {
+        resolve(response.data)
+      }, err => {
+        reject(err)
+      })
+  })
 }
 /**
  * get 方法封装

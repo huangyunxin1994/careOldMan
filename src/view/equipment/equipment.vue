@@ -3,7 +3,7 @@
     <wt-header></wt-header>
     <div class="main">
       <div class="contentLeft">
-        <my-tree></my-tree>
+        <my-tree @getPlatformData="getPlatformData"></my-tree>
       </div>
           <div class="enroll-manage-main">
               <div class="enroll-manage-container" ref="container">
@@ -69,7 +69,7 @@
               </div>
           </div>
     </div>
-    <dialog-batch ref="batchMess"></dialog-batch>
+    <dialog-batch ref="batchMess" :platformId="platformId"></dialog-batch>
     <dialog-smi ref="changeSmi" @updateEquip="updateEquip" ></dialog-smi>
   </div>
 </template>
@@ -79,7 +79,7 @@
   import dialogBatch from '@/components/dialogBatchMess/dialogBatchMess.vue'
   import dialogSmi from '@/components/changeSMI/changeSMI.vue'
   import myTree from '@/components/tree/tree_.vue'
-  import { getEquipment, updateEquipment, downloadModal } from '@/api/api'
+  import { getEquipment, updateEquipment, downloadModal, synchronization } from '@/api/api'
   export default {
     name:'home',
     components:{
@@ -302,6 +302,7 @@
         ],
         tableAllData: [],
         clientHeight:'',
+        platformId:"",
         options:[
             {
             value: '',
@@ -325,6 +326,15 @@
       getEquipment(){
         getEquipment().then(res=>{
           console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      getPlatformData(id){
+        this.platformId = id
+        getEquipment({platformId:id}).then(res=>{
+           this.tableData = res.data.data
+          this.tableAllData = res.data.data
         }).catch(err=>{
           console.log(err)
         })
@@ -368,20 +378,40 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.$message({
-              type: 'success',
-              message: '同步成功!'
-            });
+            synchronization().then(res=>{
+              if(res.code==0){
+                 this.$message({
+                  type: 'success',
+                  message: '同步成功!'
+                });
+              }else{
+                 this.$message({
+                  type: 'error',
+                  message: '同步失败!'
+                });
+              }
+
+            }).catch(err=>{
+                this.$message({
+                  type: 'error',
+                  message: '同步失败!'
+                });
+            })
+           
           }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '同步失败'
-            });
           });
       },
       //批量导入
       importMess(){
-        this.$refs.batchMess.dialogPassVisible = true
+        if(this.platformId!=""){
+          this.$refs.batchMess.dialogPassVisible = true
+        }else{
+          this.$message({
+              type: 'warning',
+              message: '请选择平台后再继续'
+            });
+        }
+        
       },
       /****** 修改SIM卡 start ******/
       changeSMI(index,row){

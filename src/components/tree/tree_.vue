@@ -14,47 +14,31 @@
 </template>
 
 <script>
+import { getPlatform } from "@/api/api"
 export default {
   name: 'tree',
   data(){
     return{
       filterText:"",
-      data: [{
-          label: '未关联设备',
-
-          // children: [
-          //     {
-          //       label: '仙湖派出所',
-          //     },
-          //     {
-          //       label: '南湖派出所',
-          //     },
-          //     {
-          //       label: '凤岭派出所',
-          //     }
-          //  ]
-        },
-        {
-          label: '仙湖派出所',
-        },
-        {
-          label: '南湖派出所',
-        },
-        {
-          label: '凤岭派出所',
-        },
-        {
-          label: '东葛派出所',
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
+      data: [],
+      defaultProps: {
+        children: 'children',
+        label: 'name'
+      }
     }
+  },
+  mounted(){
+    getPlatform().then(res=>{
+      console.log(res)
+      this.data = res.data.data
+    }).catch(err=>{
+
+    })
   },
     methods: {
       handleNodeClick(data) {
         console.log(data);
+        this.$emit('getPlatformData',data.id)
       },
        filterNode(value, data) {
         if (!value) return true;
