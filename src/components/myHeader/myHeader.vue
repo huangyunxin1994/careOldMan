@@ -9,16 +9,17 @@
     		<router-link to="/equipment" >设备管理</router-link>
     	</div>
     	<div class="userSwarp">
-        <el-dropdown >
-            <!-- <span class="name"><i class="iconfont icon-wo"></i>你好,小李</span> -->
-            <i class="el-icon-setting " style="font-size: 1vw; color: white;"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
-              <!-- <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item> -->
-            </el-dropdown-menu>
-          </el-dropdown>
-          <div class="userName">你好,小李</div>
+			<el-dropdown class="avatar-container" trigger="click">
+			  <div>
+				<i class="iconfont icon-wo"></i>
+				<span class="user-name">你好,小李</span>
+			  </div>
+			  <el-dropdown-menu slot="dropdown" class="user-dropdown">
+				<el-dropdown-item divided @click.native="logout">
+				  <span style="display:block;">退出登录</span>
+				</el-dropdown-item>
+			  </el-dropdown-menu>
+			</el-dropdown>
     	</div>
     </nav>
   </el-row>
@@ -40,20 +41,9 @@
       logout(){
         var _this = this;
         this.$confirm('确认退出吗?', '提示', {
-        	//type: 'warning'
         }).then(() => {
           _this.$router.push('/login');
-        	// let type1 = sessionStorage.getItem('type')
-        	// type1 = JSON.parse(type1)
-        	// if(type1 == 1){
-        	// 	sessionStorage.removeItem('type');
-        	// 	sessionStorage.removeItem('user');
-        	// 	_this.$router.push('/userLogin');
-        	// }else{
-        	// 	sessionStorage.removeItem('type');
-        	// 	sessionStorage.removeItem('user');
-        	// 	_this.$router.push('/login');
-        	// }
+		  sessionStorage.removeItem('user');
         }).catch(() => {
 
         });
@@ -113,25 +103,32 @@
     margin-right: 6.5vw;
     padding: 0px 0.5vw 0px 0.5vw;
   }
-
+  
   /*右边部分*/
   .userSwarp{
-  	width: 10%;
-  	font-size: 0.8vw;
-  	color: white;
-  }
-  .userSwarp .iconfont{
-  	font-size: 1.5vw;
-  }
-  .userSwarp span{
-    padding-right: 5%;
-  }
-  .userName{
-    padding-left: 5px !important;
-  }
-  .userSwarp{
+  	width: 20%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding-right: 3vw;
+  	font-size: 0.7vw;
+  	color: white;
+  }
+  .userSwarp>span{
+    cursor: pointer;
+  }
+  .userSwarp .iconfont{
+  	font-size: 1.2vw;
+	color: #fff;
+  }
+  .userSwarp>span{
+    padding: 0px 0.5vw 0px 0.5vw;
+  }
+  .name i{
+    color: #fff;
+  }
+  .user-name{
+    color: white;
   }
 </style>
