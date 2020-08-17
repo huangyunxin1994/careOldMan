@@ -1,13 +1,5 @@
 <template>
 <div class="login-background">
-  <!-- <img class='login-img' > -->
-  <div class='login-logo'>
-    <!-- <div class="logo" >
-      <i class="iconfont">&#xe62b;</i>
-    </div>
-    <h1 class="title">{{platFormName}}</h1> -->
-
-  </div>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
 
 
@@ -26,30 +18,16 @@
     <el-form-item style="width:100%;">
       <el-button  class="login-button" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
     </el-form-item>
-    <!-- <change-passworld ref="changePass"></change-passworld> -->
-    <!-- <verify-idcard ref="verifyId" ></verify-idcard> -->
   </el-form>
-  <!-- <div class="footer">
-      <span class="footer-message">© 2019-2020 中科华宸创新科技研发中心.</span>
-      <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45010302002241">
-        <span>桂公网安备 45010302002241号</span >
-      </a>
-      <a target="_blank" href="http://beian.miit.gov.cn/">桂ICP备20002998号-1</a>
-    </div> -->
   </div>
 </template>
 
 <script>
-  // import { requestLogin,getPlatForm } from '../api/api';
-  // import changePassworld from '../components/changePass/index.vue'
-  // import verifyIdcard from '../components/verify-IDCard/index.vue'
-  // import {Debounce} from '@/utils/index.js'
+  import { requestLogin } from '@/api/api.js';
+  import {Debounce} from '@/utils/index.js'
   //import NProgress from 'nprogress'
   export default {
-    components:{
-      // changePassworld,
-      // verifyIdcard
-    },
+    components:{},
     data() {
       return {
         platFormName:"",
@@ -78,65 +56,42 @@
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
       },
-      handleSubmit2(){
-        this.$router.push({ path: '/index' });
-      },
-      // handleSubmit2: Debounce(function() {
-      //   var _this = this;
-      //   this.$refs.ruleForm2.validate((valid) => {
-      //       if (valid) {
-      //         //_this.$router.replace('/table');
-      //           this.logining = true;
-      //           //NProgress.start();
-      //           var loginParams = { account: this.ruleForm2.account, password: this.ruleForm2.checkPass ,type:2};//普通用户传2
-      //           requestLogin(loginParams).then(data => {
-      //               this.logining = false;
-      //               if(data.code == 0){
-      //                   let { msg, code, user } = data.data;
-      //                   let type = data.data.type
-      //                   let boolId = user.hasOwnProperty("idCard");
-      //                   if(boolId == false){//判断身份证号是否存在，如果存在就直接登录，如果不存在，需要绑定身份证号
-      //                     this.$refs.verifyId.setShow(user.id)
-      //                   }else{
-      //                     sessionStorage.setItem('user', JSON.stringify(user));
-      //                     sessionStorage.setItem('type', JSON.stringify(type));
-
-      //                     this.$router.push({ path: '/' });
-      //                     this.$message({
-      //                       message: "登录成功",
-      //                       type: 'success'
-      //                     });
-      //                   }
-      //               }else{
-      //                   this.$message({
-      //                     message: data.msg,
-      //                     type: 'error'
-      //                   });
-      //               }
-      //         });
-      //     } else {
-      //         return false;
-      //     }
-      //   });
-      //   if(_this.checked == true){
-      //     // console.log("checked == true");
-      //     _this.setCookie(_this.ruleForm2.account,_this.ruleForm2.checkPass,7)
-      //   }else{
-      //     // console.log("清空Cookie");
-      //     _this.clearCookie();
-      //   }
-      // },300),
-      //获取平台名称
-      getPlatformName(){
-        // getPlatForm().then(res=>{
-        //   if(res.code==0){
-        //     sessionStorage.setItem('sysName', JSON.stringify(res.data.data[0]));
-        //     this.platFormName = res.data.data[0].platformName
-        //   }
-        // }).catch(err=>{
-        //   console.log(err)
-        // })
-      },
+      handleSubmit2: Debounce(function() {
+        var _this = this;
+        this.$refs.ruleForm2.validate((valid) => {
+            if (valid) {
+                this.logining = true;
+                var loginParams = { account: this.ruleForm2.account, password: this.ruleForm2.checkPass};//普通用户传2
+                requestLogin(loginParams).then(data => {
+                    this.logining = false;
+                    if(data.code == 0){
+						let {user} = data.data
+                        sessionStorage.setItem('user', JSON.stringify(user));
+                        
+                        this.$router.push({ path: '/index' });
+                        this.$message({
+                          message: "登录成功",
+                          type: 'success'
+                        });
+                    }else{
+                        this.$message({
+                          message: data.msg,
+                          type: 'error'
+                        });
+                    }
+              });
+          } else {
+              return false;
+          }
+        });
+        if(_this.checked == true){
+          // console.log("checked == true");
+          _this.setCookie(_this.ruleForm2.account,_this.ruleForm2.checkPass,7)
+        }else{
+          // console.log("清空Cookie");
+          _this.clearCookie();
+        }
+      },300),
 	  //设置cookie
 	  setCookie(c_name, c_pwd, exdays){
 		var exdate = new Date(); //获取时间
@@ -168,8 +123,7 @@
       },
     },
 	mounted() {
-    this.getCookie()
-    this.getPlatformName()
+		this.getCookie()
 	}
   }
 

@@ -12,3 +12,5 @@ export const getEquipment = params => { return get(`${base}/equipment/`, params)
 export const updateEquipment = params => { return put(`${base}/equipment/`, params, {emulateJSON: true}); }//更新设备
 
 export const downloadModal = params => { return get(`${base}/equipment/download`, params); }//下载设备导入模板
+
+export const requestLogin = params => { return post(`${base}/login/`, params); }//登录
