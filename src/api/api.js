@@ -19,5 +19,5 @@ export const forceImport = params => { return post(`${base}/equipment/forceImpor
 
 export const synchronization = params => { return get(`${base}/equipment/synchronization`, params); }//同步下发设备
 
-export const requestLogin = params => { return post(`${base}/login/`, params); }//登录
+export const requestLogin = params => { return get(`${base}/login/`, params); }//登录
 
