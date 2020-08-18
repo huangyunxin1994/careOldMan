@@ -452,7 +452,7 @@
         this.asels = sels
       },
       getRowKeys(row) {
-          return row.account;
+          return row.code;
       },
       //删除批量
       deleteFileOrDirectory(){
