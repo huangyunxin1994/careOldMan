@@ -16,6 +16,7 @@
         class="upload-demo"
         action=""
         :show-file-list="false"
+        :file-list="fileList"
         :http-request="httpRequest"
         :on-change="handleChange"
         :on-remove="handleRemove"
@@ -45,9 +46,10 @@
               </div>
              
             </div>
-           <div class="btnWrap2" v-show="repeatList.length>0">
-              <el-button type="primary" @click="nextToImport" v-show="!nexted">强制导入全部数据</el-button>
-              <el-button type="primary" @click="centerDialogVisible = false" >结束</el-button>
+           <div class="btnWrap2">
+              <el-button type="primary" @click="nextToImport" v-show="repeatList.length>0&&!nexted">强制导入全部数据</el-button>
+              <el-button type="primary" @click="closeModal() " v-show="repeatList.length>0&&!nexted&&!deal">结束</el-button>
+              <el-button type="primary" @click="closeModal()" v-show="deal">完成</el-button>
             </div>
          
         </el-dialog>
@@ -74,9 +76,22 @@
         title:'正在导入',
         nexted:false,
         list:{},
+        deal:false,
+        fileList:[]
       }
     },
     methods:{
+      closeModal(){
+        this.percentage=0
+        this.deal=false
+        this.nexted=false
+        this.title='正在导入'
+        this.customColor="#409EFF"
+        this.fileList=[]
+        this.repeatList =[]
+         this.showflag=false
+        this.centerDialogVisible=false
+      },
       httpRequest(param) {
         this.dialogPassVisible =false
         this.centerDialogVisible=true
@@ -101,6 +116,7 @@
                         type: 'success',
                         message: '导入成功'
                       });
+                      this.deal=true
                 }else{
                   // res.data = JSON.parse(res.data)
                   // console.log( res.data )
@@ -139,6 +155,7 @@
                   type: 'success',
                   message: '导入成功'
                 });
+                this.deal=true
             }else{
                this.title = "导入失败"
                this.customColor="#F56C6C"
@@ -225,12 +242,13 @@
     justify-content: space-around;
   }
   .btnWrap2{
+     margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
   .repeat-list{
-    margin: 20px 0;
+    margin-top: 20px;
     border: 1px solid #d7dae2;
     padding: 5px;
     border-radius: 5px;
