@@ -28,7 +28,7 @@
                     </div>
                   </div>
                   <el-table
-                      :data="tables.slice((page-1)*pageSize,page*pageSize)"
+                      :data="tables"
                       border stripe highlight-current-row
                       size="mini" v-loading="listLoading"
                       @selection-change="selsChange"
@@ -62,7 +62,7 @@
                      						:current-page="page"
                      						:page-sizes="[10, 15, 20, 25]"
                      						:page-size="pageSize"
-                     						:total="tables.length" >
+                     						:total="count" >
                           </el-pagination>
                      </div>
                    </div>
@@ -96,7 +96,8 @@
         inputValue:"",
         page:1,
         disableda:true,
-        pageSize:20,
+        pageSize:10,
+		count:0,
         tableTitle:[
             { title : "设备编号", name : "code", type:"input",width:"200"},
             { title : "设备状态", name : "equipmentState", type:"input",width:'100'},
@@ -106,216 +107,27 @@
             { title : "SIM卡号码", name : "phone", type:"input",width:'150'},
             { title : "操作", type : "handle",button:[],width:'100' }
         ],
-        tableData:[
-          {
-            account:'001',
-            equState:1,
-            relevancePerson:'王',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'002',
-            equState:'0',
-            relevancePerson:'李',
-            belongPlatform:'404分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'003',
-            equState:"1",
-            relevancePerson:'赵',
-            belongPlatform:'西乡塘分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'004',
-            equState:1,
-            relevancePerson:'钱',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'005',
-            equState:1,
-            relevancePerson:'孙',
-            belongPlatform:'青秀分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'006',
-            equState:0,
-            relevancePerson:'郑',
-            belongPlatform:'邕宁分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'007',
-            equState:0,
-            relevancePerson:'王',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'008',
-            equState:0,
-            relevancePerson:'李',
-            belongPlatform:'404分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'009',
-            equState:0,
-            relevancePerson:'赵',
-            belongPlatform:'西乡塘分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'010',
-            equState:1,
-            relevancePerson:'钱',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'011',
-            equState:1,
-            relevancePerson:'孙',
-            belongPlatform:'青秀分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'012',
-            equState:1,
-            relevancePerson:'郑',
-            belongPlatform:'邕宁分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'013',
-            equState:1,
-            relevancePerson:'王',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'014',
-            equState:1,
-            relevancePerson:'李',
-            belongPlatform:'404分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'015',
-            equState:0,
-            relevancePerson:'赵',
-            belongPlatform:'西乡塘分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'016',
-            equState:1,
-            relevancePerson:'钱',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'017',
-            equState:0,
-            relevancePerson:'孙',
-            belongPlatform:'青秀分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'018',
-            equState:0,
-            relevancePerson:'郑',
-            belongPlatform:'邕宁分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'019',
-            equState:1,
-            relevancePerson:'王',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'020',
-            equState:1,
-            relevancePerson:'李',
-            belongPlatform:'404分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'021',
-            equState:1,
-            relevancePerson:'赵',
-            belongPlatform:'西乡塘分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'022',
-            equState:1,
-            relevancePerson:'钱',
-            belongPlatform:'南宁总局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'023',
-            equState:0,
-            relevancePerson:'孙',
-            belongPlatform:'青秀分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          },
-          {
-            account:'024',
-            equState:0,
-            relevancePerson:'郑',
-            belongPlatform:'邕宁分局',
-            enrollTime:'2020-06-02',
-            simNumber:'15685965896'
-          }
-        ],
+        tableData:[],
         tableAllData: [],
         clientHeight:'',
         platformId:"",
         options:[
             {
-            value: '',
-            label: '全部'
+				value: '',
+				label: '全部'
             },
             {
-            value: '1',
-            label: '在线'
+				value: '1',
+				label: '在线'
             },
-        {
-            value: '0',
-            label: '离线'
+			{
+				value: '2',
+				label: '离线'
             },
+			{
+				value: '3',
+				label: '预警'
+			}
         ],
         valueW:"",
         uCode:"",
@@ -360,15 +172,39 @@
            return value;
 
       },
+	  //当前页
       handleCurrentChange(val){
          this.page = val;
+		 let param = {
+			 currentPage:this.page,
+			 pageSize:this.pageSize
+		 }
+		 getEquipment(param).then(res=>{
+		   this.tableData = res.data.data
+		   this.tableAllData = res.data.data
+		   this.count = res.data.count
+		 }).catch(err=>{
+		   console.log(err)
+		 })
       },
+	  //页数大小
       handleSizeChange(val){
       	this.pageSize = val
+		let param = {
+			 currentPage:this.page,
+			 pageSize:this.pageSize
+		}
+		getEquipment(param).then(res=>{
+		  this.tableData = res.data.data
+		  this.tableAllData = res.data.data
+		  this.count = res.data.count
+		}).catch(err=>{
+		  console.log(err)
+		})
       },
       changeResultW(val){
           this.tableData = this.tableAllData.filter(item=>{
-              return String(item.equState).indexOf(val) > -1
+              return String(item.equipmentState).indexOf(val) > -1
           })
       },
       //同步设备
@@ -471,9 +307,11 @@
       //将tabledata的值传给tableAllData(到真正对接时就不用)
       getTableAllData(){
         getEquipment().then(res=>{
+		  console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
           console.log(res)
           this.tableData = res.data.data
           this.tableAllData = res.data.data
+		  this.count = res.data.count
         }).catch(err=>{
           console.log(err)
         })
