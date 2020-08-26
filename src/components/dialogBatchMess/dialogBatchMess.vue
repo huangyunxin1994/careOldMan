@@ -91,6 +91,7 @@
         this.repeatList =[]
          this.showflag=false
         this.centerDialogVisible=false
+        this.$emit("getTableAllData")
       },
       httpRequest(param) {
         this.dialogPassVisible =false

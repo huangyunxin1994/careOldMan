@@ -69,7 +69,7 @@
               </div>
           </div>
     </div>
-    <dialog-batch ref="batchMess" :platformId="platformId"></dialog-batch>
+    <dialog-batch ref="batchMess" :platformId="platformId" @getTableAllData="getTableAllData"></dialog-batch>
     <dialog-smi ref="changeSmi" @updateEquip="updateEquip" ></dialog-smi>
   </div>
 </template>
@@ -307,7 +307,6 @@
       //将tabledata的值传给tableAllData(到真正对接时就不用)
       getTableAllData(){
         getEquipment().then(res=>{
-		  console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
           console.log(res)
           this.tableData = res.data.data
           this.tableAllData = res.data.data
