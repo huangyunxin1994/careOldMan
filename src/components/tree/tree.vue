@@ -7,6 +7,7 @@
         <el-tree
           :data="data"
           :props="defaultProps"
+          :expand-on-click-node="false"
           node-key="uid"
           ref="tree"
           highlight-current

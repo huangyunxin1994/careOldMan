@@ -10,7 +10,7 @@
         </p> -->
     	</div>
       <div class="btnWrap">
-        <el-link type="primary" href="http://192.168.1.9:8083/equipment/download" download="">下载模板</el-link>
+        <el-link type="primary" href="https://www.zkhczhcsyy-cn.com/datacenter/equipment/download" download="">下载模板</el-link>
         <el-upload
         ref="upload"
         class="upload-demo"

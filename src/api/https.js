@@ -5,7 +5,8 @@ import Qs from 'qs'
 // create an axios instance
 const service = axios.create({
   // baseURL:"/api",
-  baseURL: "http://47.115.89.236:8083/datacenter", // url = base url + request url
+  baseURL: "https://www.zkhczhcsyy-cn.com/datacenter", // url = base url + request url
+  // baseURL: "http://192.168.1.111:8083", // url = base url + request url
   timeout: 5000 // request timeout
 })
 

@@ -101,6 +101,7 @@
         tableTitle:[
             { title : "设备编号", name : "code", type:"input",width:"200"},
             { title : "设备状态", name : "equipmentState", type:"input",width:'100'},
+            { title : "是否同步", name : "isSync", type:"input",width:'100'},
             { title : "关联人员", name : "name", type:"input",minwidth:'150'},
             { title : "所属平台", name : "platformName", type:"input",minwidth:'150'},
             { title : "注册时间", name : "addTime", type:"input",width:'150'},
@@ -168,7 +169,8 @@
            return value == 1 ? '<span style="color:rgb(112, 182, 3);font-weight:bold">是</span>' :( value == 2 ? '<span style="color:#909399;font-weight:bold">否</span>' : ( value == 3 ? '<span style="color:#67C23A;font-weight:bold">进行中</span>' : ( value == 4 ? '<span style="color:#909399;font-weight:bold">已结束</span>' : '')));
           else if(name=='equipmentState')
            return value == 2 ? '<span style="color:#f79898;font-weight:bold">离线</span>' :( value == 1 ? '<span style="color:rgb(112, 182, 3);font-weight:bold">在线</span>' : ( value == 3 ? '<span style="color:rgb(112, 182, 3);font-weight:bold">预警</span>' : ''));
-          else
+          else if(name=='isSync')
+            return value == 1 ? '<span style="color:rgb(112, 182, 3);font-weight:bold">已同步</span>' : ( value == 2 ? '<span style="color:#f79898;font-weight:bold">未同步</span>' : '');
            return value;
 
       },

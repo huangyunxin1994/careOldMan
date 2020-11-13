@@ -97,6 +97,9 @@
             tableTitle:[
                 { title : "平台名称", name : "name", type:"input",minwidth:'150'},
                 { title : "状态", name : "status", type:"input",minwidth:'120'},
+                { title : "IP地址", name : "ip", type:"input",minwidth:'120'},
+                { title : "心跳时间", name : "heartbeat", type:"input",minwidth:'120'},
+                { title : "队列", name : "queue", type:"input",minwidth:'120'},
                 { title : "查看级联配置", type : "handle",button:[],width:'120' }
             ],
             //0正常 1异常
